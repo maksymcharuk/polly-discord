@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/speak', async function (req, res) {
+app.get('/speak', async function (req, res) {
   const defaultParams = {
     OutputFormat: 'mp3',
     OutputS3BucketName: 'polly-discord',
@@ -17,7 +17,7 @@ app.post('/speak', async function (req, res) {
   console.log(req);
   const params = {
     ...defaultParams,
-    Text: req.body.text,
+    Text: req.query.text,
   };
   try {
     const data = await speak(params);
